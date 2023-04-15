@@ -1,12 +1,13 @@
 # ----
 # Site
 
-title: Designathon 2023
+title: WebSTAC Designathon
 url: "https://proud-alligator.cloudvent.net"
 baseurl:
 google_analytics_key:
 google_maps_javascript_api_key:
 disqus_shortname:
+
 register_url: "https://skandalaris.wustl.edu/event/2023/04/07/dsc-designathon-2/"
 
 # Values for the jekyll-seo-tag gem (https://github.com/jekyll/jekyll-seo-tag)
@@ -17,7 +18,7 @@ author:
   email:
   twitter: # twitter username without the @ symbol
 social:
-  name: Designathon 2023
+  name: WebSTAC Designathon
   links:
     - https://github.com/dscwashu/designathon-website
 
