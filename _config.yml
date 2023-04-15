@@ -10,7 +10,7 @@ disqus_shortname:
 register_url: "https://skandalaris.wustl.edu/event/2023/04/07/dsc-designathon-2/"
 
 # Values for the jekyll-seo-tag gem (https://github.com/jekyll/jekyll-seo-tag)
-logo: /siteicon.png
+logo:
 description: "The official website for the 2023 DSC x Skandalaris Designathon!"
 author:
   name:
