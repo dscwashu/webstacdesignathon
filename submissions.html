@@ -83,8 +83,10 @@ description: Submit your design and view submissions
         .then((response) => {
             if (response.status === 200) {
                 return response.json();
+            } else if (response.status === 429) {
+                throw new Error("Too many requests are being sent to the server. Please try again a minute.")
             } else {
-                throw new Error("Something went wrong on API server!");
+                throw new Error("There was an error loading the submitted designs. Please contact us if this problem persists.");
             }
         })
         .then((json) => {
@@ -93,9 +95,9 @@ description: Submit your design and view submissions
             handleDoneLoading();
             document.getElementById("submitted-designs").appendChild(table);
         })
-        .catch(() => {
+        .catch((error) => {
             const message = document.createElement("p");
-            message.innerText = "There was an error loading the submitted designs. Please contact us if this problem persists.";
+            message.innerText = error.message;
 
             handleDoneLoading();
             document.getElementById("submitted-designs").appendChild(message);
