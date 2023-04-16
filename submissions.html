@@ -68,13 +68,20 @@ description: Submit your design and view submissions
             const tr = tbody.insertRow();
 
             const teamMembersTd = tr.insertCell();
-            teamMembersTd.appendChild(document.createTextNode(record.fields.teamMembers))
+            // Needs wrapper div https://stackoverflow.com/questions/9152042
+            const teamMembersWrapper = document.createElement("div");
+            teamMembersWrapper.setAttribute("class", "cell-wrapper");
+            teamMembersTd.appendChild(teamMembersWrapper);
+            teamMembersWrapper.appendChild(document.createTextNode(record.fields.teamMembers))
 
             const linkTd = tr.insertCell();
+            const linkWrapper = document.createElement("div");
+            linkWrapper.setAttribute("class", "cell-wrapper");
+            linkTd.appendChild(linkWrapper);
             const linkAnchor = document.createElement("a");
             linkAnchor.setAttribute("href", record.fields.link);
             linkAnchor.innerText = record.fields.link;
-            linkTd.appendChild(linkAnchor);
+            linkWrapper.appendChild(linkAnchor);
         }
         return table;
     }

@@ -60,8 +60,11 @@ table {
 }
 
 td {
-	overflow-x: scroll;
 	white-space: nowrap;
+}
+
+div.cell-wrapper {
+	overflow: scroll;
 }
 
 th, td {
