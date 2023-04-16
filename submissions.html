@@ -9,7 +9,7 @@ description: Submit your design and view submissions
         <div class="text-container">
             <h2>Submit your design</h2>
             <p>
-                Submit your design using <a href="https://airtable.com/shrbjJtsqPL5fZSNx">this form!</a>
+                Submit your design using <a href="https://airtable.com/shrbjJtsqPL5fZSNx" target="_blank">this form!</a>
 				Please submit only once per team.
             </p>
         </div>
@@ -80,6 +80,7 @@ description: Submit your design and view submissions
             linkTd.appendChild(linkWrapper);
             const linkAnchor = document.createElement("a");
             linkAnchor.setAttribute("href", record.fields.link);
+            linkAnchor.setAttribute("target", "_blank");
             linkAnchor.innerText = record.fields.link;
             linkWrapper.appendChild(linkAnchor);
         }
