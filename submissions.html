@@ -16,10 +16,9 @@ description: Submit your design and view submissions
     </section>
 
     <section>
-        <div class="text-container">
+        <div class="text-container" id="submitted-designs" aria-busy="true" aria-describedby="submitted-designs-progress">
             <h2>Submitted designs</h2>
-			<table id="submitted-designs-table">
-			</table>
+            <progress id="submitted-designs-progress" aria-label="Loading submitted designs…"></progress>
         </div>
     </section>
 </div>
@@ -51,7 +50,13 @@ description: Submit your design and view submissions
             }
         })
         .then((json) => {
-            const table = document.getElementById("submitted-designs-table");
+            const table = document.createElement("table");
+            table.animate([
+                { opacity: '0' },
+                { opacity: '1' }
+            ], {
+                duration: 200,
+            });
 
             const thead = table.createTHead();
             const theadRow = thead.insertRow();
@@ -74,7 +79,10 @@ description: Submit your design and view submissions
                 linkAnchor.innerText = record.fields.link;
                 linkTd.appendChild(linkAnchor);
             }
+            document.getElementById("submitted-designs").removeAttribute("aria-busy");
+            document.getElementById("submitted-designs-progress").setAttribute("hidden", "true");
 
+            document.getElementById("submitted-designs").appendChild(table);
         })
         .catch((error) => {
             console.log(error);
