@@ -55,9 +55,24 @@ p, address, td {
 
 table {
 	border-collapse: collapse;
+	width: 100%;
+	table-layout: fixed;
+}
+
+td {
+	overflow-x: scroll;
+	white-space: nowrap;
 }
 
 th, td {
 	border: 1px solid black;
 	padding: 5px;
+}
+
+thead {
+	background-color: #2b2b40;
+	td {
+		color: white;
+		font-weight: bold;
+	}
 }

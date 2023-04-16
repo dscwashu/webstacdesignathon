@@ -53,9 +53,17 @@ description: Submit your design and view submissions
         .then((json) => {
             const table = document.getElementById("submitted-designs-table");
 
+            const thead = table.createTHead();
+            const theadRow = thead.insertRow();
+            for (const column of ["Team members", "Link"]) {
+                const td = theadRow.insertCell();
+                td.innerText = column;
+            }
+
+            const tbody = table.createTBody();
             const records = json.records;
             for (const record of records) {
-                const tr = table.insertRow();
+                const tr = tbody.insertRow();
 
                 const teamMembersTd = tr.insertCell();
                 teamMembersTd.appendChild(document.createTextNode(record.fields.teamMembers))
