@@ -84,8 +84,13 @@ description: Submit your design and view submissions
 
             document.getElementById("submitted-designs").appendChild(table);
         })
-        .catch((error) => {
-            console.log(error);
+        .catch(() => {
+            document.getElementById("submitted-designs").removeAttribute("aria-busy");
+            document.getElementById("submitted-designs-progress").setAttribute("hidden", "true");
+
+            const message = document.createElement("p");
+            message.innerText = "There was an error loading the submitted designs. Please contact us if this problem persists.";
+            document.getElementById("submitted-designs").appendChild(message);
         });
 
 </script>
