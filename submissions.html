@@ -46,7 +46,7 @@ description: Submit your design and view submissions
         document.getElementById("submitted-designs-progress").setAttribute("hidden", "true");
     }
 
-    function createSubmissionsTable(json) {
+    function createSubmissionsTable(records) {
         const table = document.createElement("table");
         table.animate([
             { opacity: '0' },
@@ -63,7 +63,6 @@ description: Submit your design and view submissions
         }
 
         const tbody = table.createTBody();
-        const records = json.records;
         for (const record of records) {
             const tr = tbody.insertRow();
 
@@ -98,7 +97,12 @@ description: Submit your design and view submissions
             }
         })
         .then((json) => {
-            const table = createSubmissionsTable(json);
+            const records = json.records;
+            if (records.length === 0) {
+                throw new Error("There aren't any submitted designs yet. Check back later!")
+            }
+
+            const table = createSubmissionsTable(records);
 
             handleDoneLoading();
             document.getElementById("submitted-designs").appendChild(table);
