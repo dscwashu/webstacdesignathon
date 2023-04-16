@@ -41,6 +41,44 @@ description: Submit your design and view submissions
         })
     }
 
+    function handleDoneLoading() {
+        document.getElementById("submitted-designs").removeAttribute("aria-busy");
+        document.getElementById("submitted-designs-progress").setAttribute("hidden", "true");
+    }
+
+    function createSubmissionsTable(json) {
+        const table = document.createElement("table");
+        table.animate([
+            { opacity: '0' },
+            { opacity: '1' }
+        ], {
+            duration: 200,
+        });
+
+        const thead = table.createTHead();
+        const theadRow = thead.insertRow();
+        for (const column of ["Team members", "Link"]) {
+            const td = theadRow.insertCell();
+            td.innerText = column;
+        }
+
+        const tbody = table.createTBody();
+        const records = json.records;
+        for (const record of records) {
+            const tr = tbody.insertRow();
+
+            const teamMembersTd = tr.insertCell();
+            teamMembersTd.appendChild(document.createTextNode(record.fields.teamMembers))
+
+            const linkTd = tr.insertCell();
+            const linkAnchor = document.createElement("a");
+            linkAnchor.setAttribute("href", record.fields.link);
+            linkAnchor.innerText = record.fields.link;
+            linkTd.appendChild(linkAnchor);
+        }
+        return table;
+    }
+
     fetch(getSubmissionsRequest())
         .then((response) => {
             if (response.status === 200) {
@@ -50,46 +88,16 @@ description: Submit your design and view submissions
             }
         })
         .then((json) => {
-            const table = document.createElement("table");
-            table.animate([
-                { opacity: '0' },
-                { opacity: '1' }
-            ], {
-                duration: 200,
-            });
+            const table = createSubmissionsTable(json);
 
-            const thead = table.createTHead();
-            const theadRow = thead.insertRow();
-            for (const column of ["Team members", "Link"]) {
-                const td = theadRow.insertCell();
-                td.innerText = column;
-            }
-
-            const tbody = table.createTBody();
-            const records = json.records;
-            for (const record of records) {
-                const tr = tbody.insertRow();
-
-                const teamMembersTd = tr.insertCell();
-                teamMembersTd.appendChild(document.createTextNode(record.fields.teamMembers))
-
-                const linkTd = tr.insertCell();
-                const linkAnchor = document.createElement("a");
-                linkAnchor.setAttribute("href", record.fields.link);
-                linkAnchor.innerText = record.fields.link;
-                linkTd.appendChild(linkAnchor);
-            }
-            document.getElementById("submitted-designs").removeAttribute("aria-busy");
-            document.getElementById("submitted-designs-progress").setAttribute("hidden", "true");
-
+            handleDoneLoading();
             document.getElementById("submitted-designs").appendChild(table);
         })
         .catch(() => {
-            document.getElementById("submitted-designs").removeAttribute("aria-busy");
-            document.getElementById("submitted-designs-progress").setAttribute("hidden", "true");
-
             const message = document.createElement("p");
             message.innerText = "There was an error loading the submitted designs. Please contact us if this problem persists.";
+
+            handleDoneLoading();
             document.getElementById("submitted-designs").appendChild(message);
         });
 
