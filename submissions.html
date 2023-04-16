@@ -1,0 +1,75 @@
+---
+title: Submissions
+layout: default
+description: Submit your design and view submissions
+---
+
+<div class="content">
+    <section>
+        <div class="text-container">
+            <h2>Submit your design</h2>
+            <p>
+                Submit your design using <a href="https://airtable.com/shrbjJtsqPL5fZSNx">this form!</a>
+				Please submit only once per team.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <div class="text-container">
+            <h2>Submitted designs</h2>
+			<table id="submitted-designs-table">
+			</table>
+        </div>
+    </section>
+</div>
+
+<script>
+    function getSubmissionsRequest() {
+        const airtableURL = "https://api.airtable.com/v0/app09MJiFZnRepKIA/Submissions";
+
+        const params = new URLSearchParams();
+        params.append("fields", "teamMembers");
+        params.append("fields", "link");
+
+        const readToken = "patlpZ2uGUGb6DNzB.3438ad9d8a5c7a593f6951f1647f9143e3b4604cc650ee313b0b26dc394aa55b";
+
+        return new Request(new URL(`${airtableURL}?${params.toString()}`), {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${readToken}`
+            }
+        })
+    }
+
+    fetch(getSubmissionsRequest())
+        .then((response) => {
+            if (response.status === 200) {
+                return response.json();
+            } else {
+                throw new Error("Something went wrong on API server!");
+            }
+        })
+        .then((json) => {
+            const table = document.getElementById("submitted-designs-table");
+
+            const records = json.records;
+            for (const record of records) {
+                const tr = table.insertRow();
+
+                const teamMembersTd = tr.insertCell();
+                teamMembersTd.appendChild(document.createTextNode(record.fields.teamMembers))
+
+                const linkTd = tr.insertCell();
+                const linkAnchor = document.createElement("a");
+                linkAnchor.setAttribute("href", record.fields.link);
+                linkAnchor.innerText = record.fields.link;
+                linkTd.appendChild(linkAnchor);
+            }
+
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+
+</script>
