@@ -2,6 +2,10 @@
   link: /contact/
   new_window: false
   highlight: false
+- name: Submissions
+  link: /submissions/
+  new_window: false
+  highlight: false
 - name: Register
   link: "https://skandalaris.wustl.edu/event/2023/04/07/dsc-designathon-2/"
   new_window: true
