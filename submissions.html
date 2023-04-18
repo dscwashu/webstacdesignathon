@@ -25,15 +25,13 @@ description: Submit your design and view submissions
 
 <script>
     function getSubmissionsRequest() {
-        const airtableURL = "https://api.airtable.com/v0/app09MJiFZnRepKIA/Submissions";
-
-        const params = new URLSearchParams();
-        params.append("fields", "teamMembers");
-        params.append("fields", "link");
+        const url = new URL("https://api.airtable.com/v0/app09MJiFZnRepKIA/Submissions");
+        url.searchParams.append("fields", "teamMembers");
+        url.searchParams.append("fields", "link");
 
         const readToken = "patlpZ2uGUGb6DNzB.3438ad9d8a5c7a593f6951f1647f9143e3b4604cc650ee313b0b26dc394aa55b";
 
-        return new Request(new URL(`${airtableURL}?${params.toString()}`), {
+        return new Request(url, {
             method: "GET",
             headers: {
                 "Authorization": `Bearer ${readToken}`
