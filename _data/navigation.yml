@@ -2,6 +2,9 @@
   link: /contact/
   new_window: false
   highlight: false
+- name: Resources
+  link: /resources/
+  new_window: false
 - name: Submissions
   link: /submissions/
   new_window: false
