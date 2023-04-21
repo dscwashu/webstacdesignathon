@@ -1,0 +1,116 @@
+---
+title: Submissions
+layout: default
+description: Submit your design and view submissions
+---
+
+<div class="content">
+    <section>
+        <div class="text-container">
+            <h2>Submit your design</h2>
+            <p>
+                Submit your design using <a href="https://airtable.com/shrbjJtsqPL5fZSNx" target="_blank">this form</a>!
+				Please submit only once per team.
+            </p>
+        </div>
+    </section>
+
+    <section>
+        <div class="text-container" id="submitted-designs" aria-busy="true" aria-describedby="submitted-designs-progress">
+            <h2>Submitted designs</h2>
+            <progress id="submitted-designs-progress" aria-label="Loading submitted designs…"></progress>
+        </div>
+    </section>
+</div>
+
+<script>
+    function getSubmissionsRequest() {
+        const url = new URL("https://api.airtable.com/v0/app09MJiFZnRepKIA/Submissions");
+        url.searchParams.append("fields", "teamMembers");
+        url.searchParams.append("fields", "link");
+
+        const readToken = "patlpZ2uGUGb6DNzB.3438ad9d8a5c7a593f6951f1647f9143e3b4604cc650ee313b0b26dc394aa55b";
+
+        return new Request(url, {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${readToken}`
+            }
+        })
+    }
+
+    function handleDoneLoading() {
+        document.getElementById("submitted-designs").removeAttribute("aria-busy");
+        document.getElementById("submitted-designs-progress").setAttribute("hidden", "true");
+    }
+
+    function createSubmissionsTable(records) {
+        const table = document.createElement("table");
+        table.animate([
+            { opacity: '0' },
+            { opacity: '1' }
+        ], {
+            duration: 200,
+        });
+
+        const thead = table.createTHead();
+        const theadRow = thead.insertRow();
+        for (const column of ["Team members", "Link"]) {
+            const td = theadRow.insertCell();
+            td.innerText = column;
+        }
+
+        const tbody = table.createTBody();
+        for (const record of records) {
+            const tr = tbody.insertRow();
+
+            const teamMembersTd = tr.insertCell();
+            // Needs wrapper div https://stackoverflow.com/questions/9152042
+            const teamMembersWrapper = document.createElement("div");
+            teamMembersWrapper.setAttribute("class", "cell-wrapper");
+            teamMembersTd.appendChild(teamMembersWrapper);
+            teamMembersWrapper.appendChild(document.createTextNode(record.fields.teamMembers))
+
+            const linkTd = tr.insertCell();
+            const linkWrapper = document.createElement("div");
+            linkWrapper.setAttribute("class", "cell-wrapper");
+            linkTd.appendChild(linkWrapper);
+            const linkAnchor = document.createElement("a");
+            linkAnchor.setAttribute("href", record.fields.link);
+            linkAnchor.setAttribute("target", "_blank");
+            linkAnchor.innerText = record.fields.link;
+            linkWrapper.appendChild(linkAnchor);
+        }
+        return table;
+    }
+
+    fetch(getSubmissionsRequest())
+        .then((response) => {
+            if (response.status === 200) {
+                return response.json();
+            } else if (response.status === 429) {
+                throw new Error("Too many requests are being sent to the server. Please try again a minute.")
+            } else {
+                throw new Error("There was an error loading the submitted designs. Please contact us if this problem persists.");
+            }
+        })
+        .then((json) => {
+            const records = json.records;
+            if (records.length === 0) {
+                throw new Error("There aren't any submitted designs yet. Check back later!")
+            }
+
+            const table = createSubmissionsTable(records);
+
+            handleDoneLoading();
+            document.getElementById("submitted-designs").appendChild(table);
+        })
+        .catch((error) => {
+            const message = document.createElement("p");
+            message.innerText = error.message;
+
+            handleDoneLoading();
+            document.getElementById("submitted-designs").appendChild(message);
+        });
+
+</script>

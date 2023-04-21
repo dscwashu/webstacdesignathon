@@ -52,3 +52,30 @@ p, address, td {
 	font-weight: 400;
 	line-height: 1.4em;
 }
+
+table {
+	border-collapse: collapse;
+	width: 100%;
+	table-layout: fixed;
+}
+
+td {
+	white-space: nowrap;
+}
+
+div.cell-wrapper {
+	overflow: scroll;
+}
+
+th, td {
+	border: 1px solid black;
+	padding: 5px;
+}
+
+thead {
+	background-color: #2b2b40;
+	td {
+		color: white;
+		font-weight: bold;
+	}
+}
