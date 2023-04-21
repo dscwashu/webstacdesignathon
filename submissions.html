@@ -7,19 +7,24 @@ description: Submit your design and view submissions
 <div class="content">
     <section>
         <div class="text-container">
-            <h2>Submit your design</h2>
+            <h1>
+                Submissions
+            </h1>
+            <h2>Submit</h2>
             <p>
                 Submit your design using <a href="https://airtable.com/shrbjJtsqPL5fZSNx" target="_blank">this form</a>!
 				Please submit only once per team.
             </p>
+
+            <div id="submitted-designs" aria-busy="true" aria-describedby="submitted-designs-progress">
+                <h2>Submitted designs</h2>
+                <progress id="submitted-designs-progress" aria-label="Loading submitted designs…"></progress>
+            </div>
         </div>
     </section>
 
     <section>
-        <div class="text-container" id="submitted-designs" aria-busy="true" aria-describedby="submitted-designs-progress">
-            <h2>Submitted designs</h2>
-            <progress id="submitted-designs-progress" aria-label="Loading submitted designs…"></progress>
-        </div>
+
     </section>
 </div>
 
