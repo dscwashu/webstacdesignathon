@@ -10,29 +10,112 @@ description: Submit your design and view submissions
             <h1>
                 Submissions
             </h1>
-            <h2>Submit</h2>
-            <p>
-                Submit your design using <a href="https://airtable.com/shrbjJtsqPL5fZSNx" target="_blank">this form</a>!
-				Please submit only once per team.
-            </p>
 
-            <div id="submitted-designs" aria-busy="true" aria-describedby="submitted-designs-progress">
-                <h2>Submitted designs</h2>
-                <progress id="submitted-designs-progress" aria-label="Loading submitted designs…"></progress>
+            <div>
+                <h2>
+                    First round submissions
+                </h2>
+                <table>
+                    <thead>
+                    <tr>
+                        <td>Team members</td>
+                        <td>Link</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="cell-wrapper">William Chen, Skye Wang, Rita Wang</div>
+                        </td>
+                        <td>
+                            <div class="cell-wrapper"><a
+                                    href="https://drive.google.com/drive/folders/1J3neXekXArLAjQZ2QHNgDaiXeDLMh5vE?usp=share_link"
+                                    target="_blank">https://drive.google.com/drive/folders/1J3neXekXArLAjQZ2QHNgDaiXeDLMh5vE?usp=share_link</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="cell-wrapper">Soohoon Oh, Andrea Ham, Hanna Fu, Minju Kim, Chan Lee</div>
+                        </td>
+                        <td>
+                            <div class="cell-wrapper"><a
+                                    href="https://www.figma.com/file/CeRxaKjzBbVUkvDUTSChGt/Designathon?node-id=10%3A3&amp;t=rLCSMCU1UuP82m7k-1"
+                                    target="_blank">https://www.figma.com/file/CeRxaKjzBbVUkvDUTSChGt/Designathon?node-id=10%3A3&amp;t=rLCSMCU1UuP82m7k-1</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="cell-wrapper">Helen Jiang, Brendan Yang</div>
+                        </td>
+                        <td>
+                            <div class="cell-wrapper"><a
+                                    href="https://www.figma.com/proto/RpVbLjTn90mUdwPNPzIULi/Webstac-Registration?node-id=4-2&amp;scaling=min-zoom&amp;page-id=0%3A1"
+                                    target="_blank">https://www.figma.com/proto/RpVbLjTn90mUdwPNPzIULi/Webstac-Registration?node-id=4-2&amp;scaling=min-zoom&amp;page-id=0%3A1</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="cell-wrapper">Gisela Liu and Christine Ling</div>
+                        </td>
+                        <td>
+                            <div class="cell-wrapper"><a
+                                    href="https://docs.google.com/presentation/d/1bw2U2hL0_PmtYaOl21oRbwmqhPDIyiGRDVWKEuXnh3c/edit?usp=sharing"
+                                    target="_blank">https://docs.google.com/presentation/d/1bw2U2hL0_PmtYaOl21oRbwmqhPDIyiGRDVWKEuXnh3c/edit?usp=sharing</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="cell-wrapper">Isha Vasil and Pranav Palakodety</div>
+                        </td>
+                        <td>
+                            <div class="cell-wrapper"><a
+                                    href="https://docs.google.com/presentation/d/1ZyTIoePjYn-pz0UALwOIIS-mfpjt-Ea6UtnSBfRypFw/edit?usp=sharing"
+                                    target="_blank">https://docs.google.com/presentation/d/1ZyTIoePjYn-pz0UALwOIIS-mfpjt-Ea6UtnSBfRypFw/edit?usp=sharing</a>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="cell-wrapper">Helen Jiang, Brendan Yang</div>
+                        </td>
+                        <td>
+                            <div class="cell-wrapper"><a
+                                    href="https://www.figma.com/file/RpVbLjTn90mUdwPNPzIULi/Webstac-Registration?node-id=4%3A2&amp;t=eEegRCoaGl9sYiL8-1"
+                                    target="_blank">https://www.figma.com/file/RpVbLjTn90mUdwPNPzIULi/Webstac-Registration?node-id=4%3A2&amp;t=eEegRCoaGl9sYiL8-1</a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div>
+                <h2>
+                    Submit second round
+                </h2>
+                <p>
+                    Submit your design and presentation for the second round using <a href="https://airtable.com/shrUMpjw9kdZVgepM" target="_blank">this form</a>.
+                </p>
+            </div>
+
+            <div id="second-round-submissions" aria-busy="true" aria-describedby="second-round-submissions-progress">
+                <h2>Second round submissions</h2>
+                <progress id="second-round-submissions-progress" aria-label="Loading submitted designs…"></progress>
             </div>
         </div>
-    </section>
-
-    <section>
-
     </section>
 </div>
 
 <script>
     function getSubmissionsRequest() {
-        const url = new URL("https://api.airtable.com/v0/app09MJiFZnRepKIA/Submissions");
+        const url = new URL("https://api.airtable.com/v0/app09MJiFZnRepKIA/tblWDSMTh9dmEk8wt");
         url.searchParams.append("fields", "teamMembers");
-        url.searchParams.append("fields", "link");
+        url.searchParams.append("fields", "designLink");
+        url.searchParams.append("fields", "presentationLink");
 
         const readToken = "patlpZ2uGUGb6DNzB.3438ad9d8a5c7a593f6951f1647f9143e3b4604cc650ee313b0b26dc394aa55b";
 
@@ -45,22 +128,31 @@ description: Submit your design and view submissions
     }
 
     function handleDoneLoading() {
-        document.getElementById("submitted-designs").removeAttribute("aria-busy");
-        document.getElementById("submitted-designs-progress").setAttribute("hidden", "true");
+        document.getElementById("second-round-submissions").removeAttribute("aria-busy");
+        document.getElementById("second-round-submissions-progress").setAttribute("hidden", "true");
+    }
+
+    function trInsertCellWrapped(tr, content) {
+        const td = tr.insertCell();
+        // Needs wrapper div https://stackoverflow.com/questions/9152042
+        const wrapper = document.createElement("div");
+        wrapper.setAttribute("class", "cell-wrapper");
+        td.appendChild(wrapper);
+        wrapper.appendChild(content);
     }
 
     function createSubmissionsTable(records) {
         const table = document.createElement("table");
         table.animate([
-            { opacity: '0' },
-            { opacity: '1' }
+            {opacity: '0'},
+            {opacity: '1'}
         ], {
             duration: 200,
         });
 
         const thead = table.createTHead();
         const theadRow = thead.insertRow();
-        for (const column of ["Team members", "Link"]) {
+        for (const column of ["Team", "Design", "Pres."]) {
             const td = theadRow.insertCell();
             td.innerText = column;
         }
@@ -69,22 +161,19 @@ description: Submit your design and view submissions
         for (const record of records) {
             const tr = tbody.insertRow();
 
-            const teamMembersTd = tr.insertCell();
-            // Needs wrapper div https://stackoverflow.com/questions/9152042
-            const teamMembersWrapper = document.createElement("div");
-            teamMembersWrapper.setAttribute("class", "cell-wrapper");
-            teamMembersTd.appendChild(teamMembersWrapper);
-            teamMembersWrapper.appendChild(document.createTextNode(record.fields.teamMembers))
+            trInsertCellWrapped(tr, document.createTextNode(record.fields.teamMembers));
 
-            const linkTd = tr.insertCell();
-            const linkWrapper = document.createElement("div");
-            linkWrapper.setAttribute("class", "cell-wrapper");
-            linkTd.appendChild(linkWrapper);
-            const linkAnchor = document.createElement("a");
-            linkAnchor.setAttribute("href", record.fields.link);
-            linkAnchor.setAttribute("target", "_blank");
-            linkAnchor.innerText = record.fields.link;
-            linkWrapper.appendChild(linkAnchor);
+            const designAnchor = document.createElement("a");
+            designAnchor.setAttribute("href", record.fields.designLink);
+            designAnchor.setAttribute("target", "_blank");
+            designAnchor.innerText = record.fields.designLink;
+            trInsertCellWrapped(tr, designAnchor);
+
+            const presentationAnchor = document.createElement("a");
+            presentationAnchor.setAttribute("href", record.fields.presentationLink);
+            presentationAnchor.setAttribute("target", "_blank");
+            presentationAnchor.innerText = record.fields.presentationLink;
+            trInsertCellWrapped(tr, presentationAnchor);
         }
         return table;
     }
@@ -108,14 +197,14 @@ description: Submit your design and view submissions
             const table = createSubmissionsTable(records);
 
             handleDoneLoading();
-            document.getElementById("submitted-designs").appendChild(table);
+            document.getElementById("second-round-submissions").appendChild(table);
         })
         .catch((error) => {
             const message = document.createElement("p");
             message.innerText = error.message;
 
             handleDoneLoading();
-            document.getElementById("submitted-designs").appendChild(message);
+            document.getElementById("second-round-submissions").appendChild(message);
         });
 
 </script>
